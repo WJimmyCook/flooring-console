@@ -54,6 +54,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void addOrder(Order o) {
+        // The outer hashmap key is the date, if the date exists add the order
+        // else if the date doesn't exist then add entry for that date to hashmap
         if (orders.containsKey(o.getDate())) {
             orders.get(o.getDate()).put(o.getOrderNum(), o);
         } else {
@@ -77,6 +79,7 @@ public class OrderDaoImpl implements OrderDao {
     public void saveToFile() {
 
         for (String s : orders.keySet()) {
+            // try/catch to attempt to write the orders to a file
             try {
                 PrintWriter write = new PrintWriter(new FileWriter(DIRECTORY
                         + "Order_" + s + ".txt"));
@@ -115,7 +118,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void loadFromFile() {
-        
+        // try/catch to get all the file paths from the folder 'orders'
         try (Stream<Path> paths = Files.walk(Paths.
                 get("orders"))) {
             paths.forEach(filePath -> {
@@ -183,11 +186,6 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
     
-//    try (Stream<Path> paths = Files.walk(Paths.
-//                get("orders"))) {
-//            paths.forEach(filePath -> {
-//                if (Files.isRegularFile(filePath)) {
-
     @Override
     public void deleteEmptyFile() throws IOException {
 

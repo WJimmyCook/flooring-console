@@ -49,6 +49,7 @@ public class TaxDaoImpl implements TaxDao {
 
             String[] lineProps = line.split(DELIMITER);
 
+            // There should only be 2 items in the array: state and tax
             if (lineProps.length != 2) {
 
             } else {

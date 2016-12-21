@@ -48,7 +48,8 @@ public class ProductDaoImpl implements ProductDao{
             String line = reader.nextLine();
 
             String[] lineProps = line.split(DELIMITER);
-
+            
+            // There should only be 3 items in the array: type, cost, and labor
             if (lineProps.length != 3) {
 
             } else {
